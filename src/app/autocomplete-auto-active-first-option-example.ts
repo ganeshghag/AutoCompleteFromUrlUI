@@ -19,21 +19,27 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
   //SERVER_URL = 'https://demo7389702.mockable.io/trypost1';
   
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three','Ganesh','Manohar','Ghag','New','Zuper'];
+  options: string[] = ['One', 'Two'];
   filteredOptions: Observable<string[]>;
 
   ngOnInit() {
+    console.log('from ngInit GG ');
+    this.sendPostRequest('James 9823456567 paid on 25/12/2020 and 1,234.23 to ganesh@email.com').subscribe(
+      res => {
+        console.log('RESP IS '+JSON.stringify(res));
+        var emails = res[0];        var mobiles = res[1];
+        var dates = res[2];        var amounts = res[3];
+        var names = res[4];
+        console.log(emails);console.log(mobiles);console.log(dates);console.log(amounts);console.log(names);
+        this.options.concat(res[0]);
+      }
+    );
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
 
-    console.log('from ngInit GG ');
-    this.sendPostRequest('this is so ganesh@email.com').subscribe(
-      res => {
-        console.log('RESP IS '+JSON.stringify(res));
-      }
-);
   }
 
   private sendPostRequest(data: any): Observable<any> {
