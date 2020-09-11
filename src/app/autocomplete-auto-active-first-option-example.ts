@@ -31,10 +31,12 @@ export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
         var dates = res[2];        var amounts = res[3];
         var names = res[4];
         console.log(emails);console.log(mobiles);console.log(dates);console.log(amounts);console.log(names);
-        this.options.concat(res[0]);
+        this.filteredOptions = res[0];
+        //this.options = ['FIFTY','FORTY'];
       }
+       
     );
-
+    this.options = ['FIFTY','FORTY'];
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
